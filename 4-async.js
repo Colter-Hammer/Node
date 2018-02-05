@@ -9,5 +9,5 @@ const log = console.log;
 
 let input = fs.readFile(process.argv[2], (err, file) => {
     if (err) return err;
-    log(file.toString().slice('\n').length - 1);
+    log(file.toString().split('\n').length -1);
 });
