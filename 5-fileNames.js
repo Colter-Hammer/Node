@@ -5,32 +5,40 @@
  * 
  * filter by the ext.  if(path.extname(fileNames) == "." + things) {return fileNames};
  * 
- * ***I don't completely understand callbacks/how to use them in my code.  I know what I want it to do, and I think I know how to get it done, but it's not working and I imagine it's because of the callback, so how can I get it working?
+ * Callback logic can either be used inline with the async code, or you can do the logic of the function seperately and use the function as long as you have the correct error handling. 
  ****************************/
 
 const fs = require('fs');
 const path = require('path');
 const clog = console.log;
 
-var input = process.argv;
-var file = input[2];
-var fileType = input[3];
+var dir = process.argv[2];
+var fileType = process.argv[3];
+// clog(input);
 
-var fileNames = fs.readdir(file, (err, thing) => {
-    if (err) return err;
-    var string = thing.toString()
-    var array = string.filter(things => {
-        if (path.extname(things) == '.' + fileType) {
-            clog(array);
-            return thing;
+fs.readdir(dir, (err, files) => {
+    if (err) {
+        clog(err);
+        return;
+    }
+
+    files.forEach(file => {
+        if (path.extname(file) == '.' + fileType) {
+            clog(file);
         }
     });
 });
 
 
-
-// fileNames.toString().filter(thing => {
-//     if (path.extname(thing) == '.' + things) {
-//         return thing;
+//***** 
+// function extension(err, files) {
+//     if (err) {
+//         clog(err);
+//         return;
 //     }
-// });
+
+//     let answer = files.filter(file => {
+//         return path.extname(file) == '.' + fileType;
+//     });
+//     answer.forEach(file => clog(file));
+// }
