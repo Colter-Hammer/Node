@@ -9,10 +9,22 @@
 
 const fs = require('fs');
 const path = require('path');
+var number = [];
 
-function doThings(dir, ext) {
-    return 'stuff';
+function doThings(dir, ext, callback) {
+    fs.readdir(dir, 'utf8', (err, files) => {
+        if (err) {
+            return callback(err);
+        }
+        files.forEach(file => {
+            if (path.extname(file) == '.' + ext) {
+                number += file;
+            }
+            return callback(null, number);
+        });
+    });
 }
-console.log(doThings());
+
+
 
 module.exports = doThings;
