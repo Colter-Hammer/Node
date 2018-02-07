@@ -4,10 +4,12 @@
  * call the function
  * console.log(data returned with function)
  *********************/
-const practice = require('./6-module.js');
+const doThings = require('./6-module.js');
 
 let dir = process.argv[2];
 let ext = process.argv[3];
 
-let jello = practice.doThings(dir, ext);
-console.log(jello);
+let jello = doThings(dir, ext, (err, files) => {
+    if(err) return(console.log(err));
+    files.forEach(files => console.log(files));
+});
