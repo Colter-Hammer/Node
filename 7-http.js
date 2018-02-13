@@ -6,11 +6,6 @@ http.get(url, response);
 
 function response(res) {
     res.setEncoding('utf8');
-    let string = [];
-    res.on('data', (data) => {
-        string.push(data);
-    });
-    res.on('end', (data) => {
-        console.log(string);
-    });
+    res.on('data', (data) => console.log(data));
+    res.on('end', (data) => console.log("Yo done fool"));
 }
