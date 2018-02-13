@@ -16,7 +16,7 @@ var dir = process.argv[2];
 var fileType = process.argv[3];
 // clog(input);
 
-fs.readdir(dir, (err, files, callback) => {
+fs.readdir(dir, (err, files) => {
     if (err) {
         clog(err);
         return;

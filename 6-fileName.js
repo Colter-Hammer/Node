@@ -9,7 +9,10 @@ const doThings = require('./6-module.js');
 let dir = process.argv[2];
 let ext = process.argv[3];
 
-let jello = doThings(dir, ext, (err, files) => {
-    if(err) return(console.log(err));
-    files.forEach(files => console.log(files));
-});
+doThings(dir, ext, print);
+
+function print(err, files) {
+    if (err) return console.log(err);
+    files.forEach(file => console.log(file));
+}
+

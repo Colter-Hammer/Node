@@ -9,19 +9,22 @@
 
 const fs = require('fs');
 const path = require('path');
-var number = [];
+var filteredFiles = [];
 
 function doThings(dir, ext, callback) {
     fs.readdir(dir, 'utf8', (err, files) => {
         if (err) {
+            //learnyounode is saying that this should be returned. Why is that if it's calling the function?
+            //is it because you don't want to continue reading the files after the error?
             return callback(err);
         }
+     
         files.forEach(file => {
             if (path.extname(file) == '.' + ext) {
-                number += file;
+                filteredFiles.push(file);
             }
-            return callback(null, number);
         });
+        callback(null, filteredFiles);
     });
 }
 
