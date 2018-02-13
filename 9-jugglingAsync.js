@@ -16,29 +16,28 @@ var list = process.argv;
 var array = [];
 var count = 0;
 
-function printResult() {
-    for (var i = 0; i < list.length - 2; i++) {
-        console.log(array[i]);
-    }
-}
+// function printResult() {
+//     for (var i = 0; i < list.length - 2; i++) {
+//         console.log(array[i]);
+//     }
+// }
 
 for (var i = 0; i < list.length - 2; i++) {
     let str = '';
     let x = i;
-    http.get(list[2 + x], data => {
+    http.get(list[x + 2], data => {
         data.setEncoding('utf8');
         data.on('data', data => str += data);
-        data.on('error', error => {
-            console.log(error);
-        });
+        data.on('error', error => console.log(error));
         data.on('end', () => {
             array[x] = str;
-            // console.log(str);
-            // console.log(array);
-            count++;
-            if (count == 3) {
-                printResult();
-                // console.log(array);
+            // console.log(count);
+            // console.log('array:  ' + array[x]);
+            if (++count == 3) {
+                // console.log('Print');
+                for( let j = 0; j < list - 2; j++) {
+                    console.log(array[j]);
+                }
             }
         });
     });

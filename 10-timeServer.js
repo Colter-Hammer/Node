@@ -5,14 +5,13 @@
 let input = process.argv[2];
 const strftime = require('strftime');
 const net = require('net');
+let time = strftime('%F %R');
 
 function listener(socket) {
-    console.log(strftime('%F %R'));
+
 }
 
 let server = net.createServer(socket => {
-    console.log(socket);
+    socket.end(time);
 });
 server.listen(input);
-
-console.log(strftime('%F %R'));
