@@ -1,16 +1,9 @@
-/**
- * 
- * 
- */
-
 const http = require('http');
 const fs = require('fs');
-let port = process.argv[2];
-let path = process.argv[3];
 
-let src = fs.createReadStream(path);
+let src = fs.createReadStream(process.argv[3]);
 
 let server = http.createServer((req, res) => {
     src.pipe(res);
 });
-server.listen(port);
+server.listen(process.argv[2 ]);
