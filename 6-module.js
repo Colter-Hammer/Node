@@ -18,7 +18,6 @@ function doThings(dir, ext, callback) {
             //is it because you don't want to continue reading the files after the error?
             return callback(err);
         }
-     
         files.forEach(file => {
             if (path.extname(file) == '.' + ext) {
                 filteredFiles.push(file);
