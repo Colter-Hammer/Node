@@ -12,22 +12,26 @@
 const URL = require('url');
 const http = require('http');
 
-let myurl = ('api/parsetime?iso=2013-08-12T12:10:12.474Z');
+let server = http.createServer((req, res) => {
+    let parsed = URL.parse(req.url, true).query.iso;
+    console.log(parsed);
+    let dates = new Date(parsed);
+    console.log(dates);
 
-let things = myurl.toString().split('=');
-// // let MYDDate = new Date(dates[1]);
-// console.log(dates[1]);
+    let hour = dates.getHours();
+    let minute = dates.getMinutes();
+    let seconds = dates.getSeconds();
 
+    let dateThing = {
+        "hour": hour,
+        "minute": minute,
+        "second": seconds
+    }
 
-
-
-let parsed = URL.parse(myurl);
-let query = parsed.query.split('=');
-let time = Array.from(query[1].split('T')[1]);
-time.splice(time.length - 1, 1);
-stuff = time.join('');
-
-let dates = new Date(stuff);
-// Array.from(time[1]);
-
-console.log(dates);
+    let unixtime = {
+        "unixtime": dates.getTime()
+    };
+    console.log(JSON.stringify(dateThing, null, 2));
+    console.log(JSON.stringify(unixtime, null, 2));
+});
+server.listen(process.argv[2]);
